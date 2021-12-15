@@ -70,6 +70,11 @@ bool Cards::isEmpty()
     return m_cards.isEmpty();
 }
 
+bool Cards::isEmpty() const
+{
+    return m_cards.isEmpty();
+}
+
 void Cards::clear()
 {
     m_cards.clear();

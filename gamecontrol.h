@@ -66,25 +66,25 @@ public:
 
     void onGrabBet(Player* player, int bet);
 
-    void onPlayHand(Player *player, Cards &card);
+    void onPlayHand(Player *player, const Cards &card);
 
 signals:
     void playerStatusChanged(Player* player, PlayerStatus status);
     void notifyGrabLordBet(Player* player, int bet, bool flag);
     void gameStatusChanged(GameStatus status);
-    void notifyPlayHand(Player* player, Cards& card);
-    void pendingInfo(Player* player, Cards& card);
+    void notifyPlayHand(Player* player, const Cards& card);
+    void pendingInfo(Player* player, const Cards& card);
 
 private:
-    Robot* m_robotLeft;
-    Robot* m_robotRight;
-    UserPlayer* m_user;
-    Player* m_currPlayer;
-    Player* m_pendPlayer;
+    Robot* m_robotLeft = nullptr;
+    Robot* m_robotRight = nullptr;
+    UserPlayer* m_user = nullptr;
+    Player* m_currPlayer = nullptr;
+    Player* m_pendPlayer = nullptr;
     Cards m_pendCards;
     Cards m_allCards;
     BetRecord m_betRecord;
-    int m_curBet;
+    int m_curBet = 0;
 
 };
 

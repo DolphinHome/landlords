@@ -11,7 +11,7 @@ class CardPanel : public QWidget
 public:
     explicit CardPanel(QWidget *parent = nullptr);
 
-    void setImage(QPixmap &front, QPixmap &back);
+    void setImage(const QPixmap &front, const QPixmap &back);
     QPixmap getImage();
 
     void setFrontSide(bool flag);
@@ -20,7 +20,7 @@ public:
     void setSeclected(bool flag);
     bool isSelected();
 
-    void setCard(Card& card);
+    void setCard(const Card& card);
     Card getCard();
 
     void setOwner(Player* player);
@@ -38,10 +38,10 @@ signals:
 private:
     QPixmap m_front;
     QPixmap m_back;
-    bool m_isfront;
-    bool m_isSelect;
+    bool m_isfront = true;
+    bool m_isSelect = false;
     Card m_card;
-    Player* m_owner;
+    Player* m_owner = nullptr;
 };
 
 #endif // CARDPANEL_H

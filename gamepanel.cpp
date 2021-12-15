@@ -134,19 +134,19 @@ void GamePanel::initButtonsGroup()
 
 void GamePanel::initPlayerContext()
 {
-    QRect cardsRect[] =
+    const QRect cardsRect[] =
     {
         QRect(90, 130, 100, height() - 200),
         QRect(rect().right() - 190, 130, 100, height() - 200),
         QRect(250, rect().bottom() - 120, width() - 500, 100)
     };
-    QRect playHandRect[] =
+    const QRect playHandRect[] =
     {
         QRect(260, 150, 100, 100),
         QRect(rect().right() - 360, 150, 100, 100),
         QRect(150, rect().bottom() - 290, width() - 300, 105)
     };
-    QPoint roleImgPos[] =
+    const QPoint roleImgPos[] =
     {
         QPoint(cardsRect[0].left()-80, cardsRect[0].height() / 2 + 20),
         QPoint(cardsRect[1].right()+10, cardsRect[1].height() / 2 + 20),
@@ -273,7 +273,7 @@ void GamePanel::startDispatchCard()
 void GamePanel::cardMoveStep(Player *player, int curPos)
 {
     QRect cardRect = m_contextMap[player].cardRect;
-    int unit[] = {
+    const int unit[] = {
         (m_baseCardPos.x() - cardRect.right()) / 100,
         (cardRect.left() - m_baseCardPos.x()) / 100,
         (cardRect.top() - m_baseCardPos.y()) / 100
@@ -298,9 +298,10 @@ void GamePanel::cardMoveStep(Player *player, int curPos)
     }
 }
 
-void GamePanel::disposeCard(Player *player, Cards &cards)
+void GamePanel::disposeCard(Player *player, const Cards &cards)
 {
-    CardList list = cards.toCardList();
+    Cards& myCard = const_cast<Cards&>(cards);
+    CardList list = myCard.toCardList();
     for(int i=0; i<list.size(); ++i)
     {
         CardPanel* panel = m_cardMap[list.at(i)];
@@ -519,11 +520,12 @@ void GamePanel::onGrabLordBet(Player *player, int bet, bool flag)
     m_bgm->playerRobLordMusic(bet, (BGMControl::RoleSex)player->getSex(), flag);
 }
 
-void GamePanel::onDisposePlayHand(Player *player, Cards &cards)
+void GamePanel::onDisposePlayHand(Player *player, const Cards &cards)
 {
     auto it = m_contextMap.find(player);
     it->lastCards = cards;
-    PlayHand hand(cards);
+    Cards& myCards = const_cast<Cards&>(cards);
+    PlayHand hand(myCards);
     PlayHand::HandType type = hand.getHandType();
     if(type == PlayHand::Hand_Plane ||
             type == PlayHand::Hand_Plane_Two_Pair ||
@@ -582,7 +584,7 @@ void GamePanel::onCardSelected(Qt::MouseButton button)
     {
         return;
     }
-    CardPanel* panel = (CardPanel*)sender();
+    CardPanel* panel = static_cast<CardPanel*>(sender());
     if(panel->getOwner() != m_gameCtl->getUserPlayer())
     {
         return;

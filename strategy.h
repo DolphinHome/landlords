@@ -22,7 +22,7 @@ public:
     Cards getRangeCards(Card::CardPoint begin, Card::CardPoint end);
     QVector<Cards> findCardType(PlayHand hand, bool beat);
 
-    void pickSeqSingles(QVector<QVector<Cards>> &allSeqRecord, QVector<Cards> &seqSingle, Cards& cards);
+    void pickSeqSingles(QVector<QVector<Cards>> &allSeqRecord, const QVector<Cards> &seqSingle, const Cards& cards);
     QVector<Cards> pickOptimalSeqSingles();
 
 private:

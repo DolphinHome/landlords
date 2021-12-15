@@ -43,18 +43,17 @@ public:
 
     void grabLordBet(int point);
 
-    void storeDispatchCard(Card& card);
-    void storeDispatchCard(Cards& cards);
+    void storeDispatchCard(const Card& card);
+    void storeDispatchCard(const Cards& cards);
 
     Cards getCards();
     void clearCards();
-    void playHand(Cards& cards);
+    void playHand(const Cards& cards);
 
-    void setPendingInfo(Player* player, Cards& cards);
     Player* getPendPlayer();
     Cards getPendCards();
 
-    void storePendingInfo(Player* player, Cards& cards);
+    void storePendingInfo(Player* player, const Cards& cards);
 
     virtual void prepareCallLord();
     virtual void preparePlayHand();
@@ -65,22 +64,22 @@ public:
 
 signals:
     void notifyGrabLordBet(Player* player, int bet);
-    void notifyPlayHand(Player* player, Cards& card);
-    void notifyPickCards(Player* player, Cards& cards);
+    void notifyPlayHand(Player* player, const Cards& card);
+    void notifyPickCards(Player* player, const Cards& cards);
 
 protected:
-    int m_score;
+    int m_score = 0;
     QString m_name;
     Role m_role;
     Sex m_sex;
     Direction m_direction;
     Type m_type;
-    bool m_isWin;
-    Player* m_prev;
-    Player* m_next;
+    bool m_isWin = false;
+    Player* m_prev = nullptr;
+    Player* m_next = nullptr;
     Cards m_cards;
     Cards m_pendCards;
-    Player* m_pendPlayer;
+    Player* m_pendPlayer = nullptr;
 };
 
 #endif // PLAYER_H

@@ -5,7 +5,6 @@
 
 AnimationWindow::AnimationWindow(QWidget *parent) : QWidget(parent)
 {
-    m_x = 0;
 }
 
 void AnimationWindow::showBetScore(int bet)

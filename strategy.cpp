@@ -2,10 +2,10 @@
 #include <QMap>
 #include <functional>
 
-Strategy::Strategy(Player *player, const Cards &cards)
+Strategy::Strategy(Player *player, const Cards &cards):
+    m_player(player),
+    m_cards(cards)
 {
-    m_player = player;
-    m_cards  = cards;
 }
 
 Cards Strategy::makeStrategy()
@@ -243,7 +243,7 @@ Cards Strategy::getGreaterCards(PlayHand type)
     remain.remove(Strategy(m_player, remain).pickOptimalSeqSingles());
 
 
-    auto beatCard = std::bind([=](Cards & cards){
+    auto beatCard = std::bind([=](const Cards & cards){
         QVector<Cards> beatCardsArray = Strategy(m_player, cards).findCardType(type, true);
         if(!beatCardsArray.isEmpty())
         {
@@ -444,7 +444,7 @@ QVector<Cards> Strategy::findCardType(PlayHand hand, bool beat)
     }
 }
 
-void Strategy::pickSeqSingles(QVector<QVector<Cards>> &allSeqRecord, QVector<Cards> &seqSingle, Cards &cards)
+void Strategy::pickSeqSingles(QVector<QVector<Cards>> &allSeqRecord, const QVector<Cards> &seqSingle, const Cards &cards)
 {
     QVector<Cards> allSeq = Strategy(m_player, cards).findCardType(PlayHand(PlayHand::Hand_Seq_Single, Card::Card_Begin, 0), false);
     if(allSeq.isEmpty())

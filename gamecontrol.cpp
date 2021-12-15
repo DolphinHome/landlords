@@ -233,7 +233,7 @@ void GameControl::onGrabBet(Player *player, int bet)
     m_currPlayer->prepareCallLord();
 }
 
-void GameControl::onPlayHand(Player *player, Cards &card)
+void GameControl::onPlayHand(Player *player, const Cards &card)
 {
     emit notifyPlayHand(player, card);
     if(!card.isEmpty())
@@ -242,7 +242,8 @@ void GameControl::onPlayHand(Player *player, Cards &card)
         m_pendPlayer = player;
         emit pendingInfo(player, card);
     }
-    PlayHand::HandType type = PlayHand(card).getHandType();
+    Cards myCards = const_cast<Cards&>(card);
+    PlayHand::HandType type = PlayHand(myCards).getHandType();
     if(type == PlayHand::Hand_Bomb || type == PlayHand::Hand_Bomb_Jokers)
     {
         m_curBet = m_curBet * 2;

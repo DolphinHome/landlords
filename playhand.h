@@ -41,7 +41,7 @@ public:
     };
 
     PlayHand();
-    PlayHand(Cards& cards);
+    explicit PlayHand(Cards& cards);
     PlayHand(HandType type, Card::CardPoint pt, int extra);
 
 

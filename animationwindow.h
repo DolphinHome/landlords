@@ -28,8 +28,8 @@ protected:
 
 private:
     QPixmap m_image;
-    int m_index;
-    int m_x;
+    int m_index = 0;
+    int m_x = 0;
 
 };
 

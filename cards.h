@@ -9,7 +9,7 @@ class Cards
 public:
     enum SortType{Asc, Desc, NoSort};
     Cards();
-    Cards(const Card& card);
+    explicit Cards(const Card& card);
 
     void add(const Card& card);
     void add(const Cards& cards);
@@ -25,6 +25,7 @@ public:
 
     int cardCount();
     bool isEmpty();
+    bool isEmpty() const;
     void clear();
 
     Card::CardPoint maxPoint();

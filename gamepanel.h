@@ -33,14 +33,14 @@ public:
     void gameStatusPrecess(GameControl::GameStatus status);
     void startDispatchCard();
     void cardMoveStep(Player* player, int curPos);
-    void disposeCard(Player* player, Cards& cards);
+    void disposeCard(Player* player, const Cards& cards);
     void updatePlayerCards(Player* player);
     QPixmap loadRoleImage(Player::Sex sex, Player::Direction direct, Player::Role role);
 
     void onDispatchCard();
     void onPlayerStatusChanged(Player* player, GameControl::PlayerStatus status);
     void onGrabLordBet(Player* player, int bet, bool flag);
-    void onDisposePlayHand(Player* player, Cards& cards);
+    void onDisposePlayHand(Player* player, const Cards& cards);
     void onCardSelected(Qt::MouseButton button);
     void onUserPlayHand();
     void onUserPass();
